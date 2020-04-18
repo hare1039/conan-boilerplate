@@ -13,7 +13,8 @@ release-mac:
 	mkdir -p build-mac && \
     cd build-mac       && \
     conan install .. --profile ../profiles/release-mac --build missing && \
-    cmake .. -DCMAKE_BUILD_TYPE=Release \
+    cmake .. -GNinja \
+             -DCMAKE_BUILD_TYPE=Release \
              -DCMAKE_C_COMPILER=clang   \
              -DCMAKE_CXX_COMPILER=clang++ && \
     cmake --build .
