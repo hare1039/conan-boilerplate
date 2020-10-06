@@ -9,6 +9,13 @@ VERBOSE=-DCMAKE_VERBOSE_MAKEFILE=ON
 release: release-mac release-linux-x86_64 release-linux-arm release-win
 	echo "build all"
 
+release-native:
+	mkdir -p build-native && \
+    cd build-native && \
+    conan install .. --profile ../profiles/release-native --build missing && \
+    cmake .. && \
+    cmake --build .
+
 release-mac:
 	mkdir -p build-mac && \
     cd build-mac       && \
