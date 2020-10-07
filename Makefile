@@ -4,6 +4,9 @@ LINUX_HEADER_arm=-I/Volumes/transcend/programs/linux-header/arm/include
 LINUX_HEADER_i386=-I/Volumes/transcend/programs/linux-header/i386/include
 VERBOSE=-DCMAKE_VERBOSE_MAKEFILE=ON
 
+CC ?= cc
+CXX ?= c++
+
 .PHONY: release release-mac release-linux-x86_64 release-linux-arm release-win
 
 release: release-mac release-linux-x86_64 release-linux-arm release-win
@@ -13,7 +16,9 @@ release-native:
 	mkdir -p build-native && \
     cd build-native && \
     conan install .. --profile ../profiles/release-native --build missing && \
-    cmake .. && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release \
+             -DCMAKE_C_COMPILER=${CC}   \
+             -DCMAKE_CXX_COMPILER=${CXX} && \
     cmake --build .
 
 release-mac:
