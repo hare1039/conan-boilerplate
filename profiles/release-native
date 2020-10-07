@@ -3,3 +3,6 @@ include(default)
 [settings]
 cppstd=17
 build_type=Release
+
+[options]
+#boost:shared=False
